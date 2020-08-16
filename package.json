@@ -1,0 +1,38 @@
+{
+  "name": "TypeORM-api",
+  "version": "1.0.0",
+  "description": "this project is about the use of the technology typeORM with express",
+  "main": "index.js",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "tsc-watch --onSuccess \" node dist/index.js\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BjornDev13/TypeORM-api.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/BjornDev13/TypeORM-api/issues"
+  },
+  "homepage": "https://github.com/BjornDev13/TypeORM-api#readme",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "morgan": "^1.10.0",
+    "pg": "^8.3.0",
+    "reflect-metadata": "^0.1.13",
+    "typeorm": "^0.2.25"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.7",
+    "@types/express": "^4.17.7",
+    "@types/morgan": "^1.9.1",
+    "@types/node": "^14.0.27",
+    "tsc-watch": "^4.2.9",
+    "typescript": "^3.9.7"
+  }
+}
