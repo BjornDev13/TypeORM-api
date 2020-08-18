@@ -36,14 +36,16 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
     }
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteUser = exports.updateUser = exports.createUser = exports.getUser = exports.getUsers = void 0;
+exports.signUser = exports.deleteUser = exports.updateUser = exports.createUser = exports.getUser = exports.getUsers = void 0;
 var typeorm_1 = require("typeorm");
-var user_1 = require("../entity/user");
+var User_1 = require("../entity/User");
+var ClassRoom_1 = require("../entity/ClassRoom");
+var typeorm_2 = require("typeorm");
 exports.getUsers = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var users;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, typeorm_1.getRepository(user_1.User).find()];
+            case 0: return [4 /*yield*/, typeorm_1.getRepository(User_1.User).find()];
             case 1:
                 users = _a.sent();
                 return [2 /*return*/, res.json(users)];
@@ -54,7 +56,7 @@ exports.getUser = function (req, res) { return __awaiter(void 0, void 0, void 0,
     var result;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, typeorm_1.getRepository(user_1.User).findOne(req.params.id)];
+            case 0: return [4 /*yield*/, typeorm_1.getRepository(User_1.User).findOne(req.params.id)];
             case 1:
                 result = _a.sent();
                 return [2 /*return*/, res.json(result)];
@@ -62,15 +64,23 @@ exports.getUser = function (req, res) { return __awaiter(void 0, void 0, void 0,
     });
 }); };
 exports.createUser = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var newUser, result;
+    var classRoomId, newUSer, result;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0:
-                newUser = typeorm_1.getRepository(user_1.User).create(req.body);
-                return [4 /*yield*/, typeorm_1.getRepository(user_1.User).save(newUser)];
+            case 0: return [4 /*yield*/, typeorm_1.getRepository(ClassRoom_1.ClassRoom).findByIds(req.body.class_room_id)];
             case 1:
+                classRoomId = _a.sent();
+                newUSer = new User_1.User();
+                newUSer.first_name = req.body.first_name;
+                newUSer.last_name = req.body.last_name;
+                newUSer.ci = req.body.ci;
+                newUSer.password = req.body.password;
+                newUSer.is_active = req.body.is_active;
+                newUSer.class_room = classRoomId;
+                return [4 /*yield*/, typeorm_2.getConnection().manager.save(newUSer)];
+            case 2:
                 result = _a.sent();
-                return [2 /*return*/, res.json(req.body)];
+                return [2 /*return*/, res.json(result)];
         }
     });
 }); };
@@ -78,12 +88,12 @@ exports.updateUser = function (req, res) { return __awaiter(void 0, void 0, void
     var user, result;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, typeorm_1.getRepository(user_1.User).findOne(req.params.id)];
+            case 0: return [4 /*yield*/, typeorm_1.getRepository(User_1.User).findOne(req.params.id)];
             case 1:
                 user = _a.sent();
                 if (!user) return [3 /*break*/, 3];
-                typeorm_1.getRepository(user_1.User).merge(user, req.body);
-                return [4 /*yield*/, typeorm_1.getRepository(user_1.User).save(user)];
+                typeorm_1.getRepository(User_1.User).merge(user, req.body);
+                return [4 /*yield*/, typeorm_1.getRepository(User_1.User).save(user)];
             case 2:
                 result = _a.sent();
                 return [2 /*return*/, res.json(result)];
@@ -95,10 +105,15 @@ exports.deleteUser = function (req, res) { return __awaiter(void 0, void 0, void
     var result;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, typeorm_1.getRepository(user_1.User).delete(req.params.id)];
+            case 0: return [4 /*yield*/, typeorm_1.getRepository(User_1.User).delete(req.params.id)];
             case 1:
                 result = _a.sent();
                 return [2 /*return*/, res.json(result)];
         }
+    });
+}); };
+exports.signUser = function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    return __generator(this, function (_a) {
+        return [2 /*return*/, res.json('si')];
     });
 }); };

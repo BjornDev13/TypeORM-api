@@ -1,10 +1,11 @@
 {
-    "type": "postgres",
-    "host": "localhost",
-    "port": 5432,
-    "username": "postgres",
-    "password": "123456",
-    "database": "type_orm_api",
-    "entities": ["dist/entity/**/*.js"],
-    "synchronize": true
+  "type": "postgres",
+  "host": "localhost",
+  "port": 5432,
+  "username": "postgres",
+  "password": "123456",
+  "database": "students",
+  "synchronize": true,
+  "logging": true,
+  "entities": ["dist/entity/**/*.js"]
 }
